@@ -27,7 +27,7 @@ class CommentController extends Controller
         return response()->json([$comment]);
     }
     public function updateComment(Request $request, $id){
-        $comment = Comment::findOfFail($id);
+        $comment = Comment::findOrFail($id);
             if($request->date){
                 $comment->date =$request->date;
             }
@@ -42,7 +42,9 @@ class CommentController extends Controller
             }    
             if($request->value){
                 $comment->value =$request->value;
-            }           
+            }
+            $comment->save();
+            return response()->json($comment);           
     }
     public function deleteComment($id){
         Comment::destroy($id);

@@ -34,7 +34,7 @@ class RepublicController extends Controller
         return response()->json([$republic]);
     }
     public function updateRepublic(Request $request, $id){
-        $republic = Republic::findOfFail($id);
+        $republic = Republic::findOrFail($id);
         if($request->name){
             $republic->name = $request->name;            
         }

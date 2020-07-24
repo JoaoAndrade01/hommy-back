@@ -25,7 +25,7 @@ class UserController extends Controller
         return response()->json([$user]);
     }
     public function updateUser(Request $request, $id){
-        $user = User::findOfFail($id);
+        $user = User::findOrFail($id);
             if($request->nickname){
                 $user->nickname =$request->nickname;
             }
@@ -37,7 +37,9 @@ class UserController extends Controller
             }
             if($request->password){
                 $user->password =$request->password;
-            }         
+            }
+            $user->save();  
+            return response()->json($user);       
     }
     public function deleteUser($id){
         User::destroy($id);
