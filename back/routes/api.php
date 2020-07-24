@@ -31,3 +31,9 @@ Route::get('showUser/{id}', 'UserController@showUser');
 Route::get('listUser', 'UserController@listUser');
 Route::put('updateUser/{id}', 'UserController@updateUser');
 Route::delete('deleteUser/{id}', 'UserController@deleteUser');
+
+Route::post('createComment', 'CommentController@createComment');
+Route::get('showComment/{id}', 'CommentController@showComment');
+Route::get('listComment', 'CommentController@listComment');
+Route::put('updateComment/{id}', 'CommentController@updateComment');
+Route::delete('deleteComment/{id}', 'CommentController@deleteComment');
