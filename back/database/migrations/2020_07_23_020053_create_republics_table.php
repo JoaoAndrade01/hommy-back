@@ -16,13 +16,13 @@ class CreateRepublicsTable extends Migration
         Schema::create('republics', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name')->default(0);
-            $table->string('street')->default(0);
-            $table->integer('number')->default(0)->unsigned();
-            $table->string('neighborhood')->default(0);
-            $table->string('city')->default(0);
-            $table->string('state')->default(0);
-            $table->integer('size')->default(0)->unsigned();            
+            $table->string('name');
+            $table->string('street');
+            $table->integer('number')->unsigned();
+            $table->string('neighborhood');
+            $table->string('city');
+            $table->string('state');
+            $table->integer('size')->unsigned();
             $table->integer('bedrooms')->default(0)->unsigned();
             $table->integer('livingRoom')->default(0)->unsigned();
             $table->integer('bathrooms')->default(0)->unsigned();
