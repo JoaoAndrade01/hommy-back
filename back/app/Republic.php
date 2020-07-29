@@ -13,7 +13,7 @@ class Republic extends Model
 {
     public function user()
     {
-        return $this->belongsTo('app\user');
+        return $this->belongsTo('App\User');
     }
     public function userLocatario()
     {
@@ -24,7 +24,7 @@ class Republic extends Model
         return $this->belongsToMany('App\User');
     }
 
-    public function createRepublic(RepublicRequest $request)
+    public function createRepublic(Request $request)
     {
         $this->name = $request->name;
         $this->street = $request->street;
@@ -40,7 +40,7 @@ class Republic extends Model
         $this->garages = $request->garages;
         $this->save();
     }
-    public function updateRepublic(RepublicRequest $request)
+    public function updateRepublic(Request $request)
     {
         if ($request->name) {
             $this->name = $request->name;

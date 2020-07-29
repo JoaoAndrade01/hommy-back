@@ -23,14 +23,20 @@ Route::get('showRepublic/{id}', 'RepublicController@showRepublic');
 Route::get('listRepublic', 'RepublicController@listRepublic');
 Route::put('updateRepublic/{id}', 'RepublicController@updateRepublic');
 Route::delete('deleteRepublic/{id}', 'RepublicController@deleteRepublic');
-Route::put('addRepublic/{user_id}/{republic_id}', 'RepublicController@addRepublic');
-Route::put('removeRepublic/{user_id}/{republic_id}', 'RepublicController@removeRepublic');
+Route::get('locatario/{id}', 'RepublicController@locatario');
+Route::get('locador/{id}', 'RepublicController@locador');
 
 Route::post('createUser', 'UserController@createUser');
 Route::get('showUser/{id}', 'UserController@showUser');
 Route::get('listUser', 'UserController@listUser');
 Route::put('updateUser/{id}', 'UserController@updateUser');
 Route::delete('deleteUser/{id}', 'UserController@deleteUser');
+Route::put('alugar/{user_id}/{republic_id}', 'UserController@alugar');
+Route::delete('desapropriar/{user_id}/{republic_id}', 'UserController@desapropriar');
+Route::put('anunciar/{user_id}/{republic_id}', 'UserController@anunciar');
+Route::get('visualizeRepublic/{id}', 'UserController@visualizeRepublic');
+Route::put('favoritar/{user_id}/{republic_id}', 'UserController@favoritar');
+Route::delete('desfavoritar/{user_id}/{republic_id}', 'UserController@desfavoritar');
 
 Route::post('createComment', 'CommentController@createComment');
 Route::get('showComment/{id}', 'CommentController@showComment');

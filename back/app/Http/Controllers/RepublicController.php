@@ -41,7 +41,7 @@ class RepublicController extends Controller
     public function locatario($id)
     {
         $republic = Republic::findOrFail($id);
-        $locatarios = $republic->userLocatario->get();
+        $locatarios = $republic->userLocatario()->get();
         return response()->json($locatarios);
     }
     public function locador($id)
@@ -49,4 +49,9 @@ class RepublicController extends Controller
         $republic = Republic::findOrFail($id);
         return response()->json($republic->user);
     }
+    public function visualizeUsers($id)
+    {
+        $republic = Republic::findOrFail($id);
+        return response()->json($republic->user_id);
+    }    
 }

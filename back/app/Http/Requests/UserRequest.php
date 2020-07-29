@@ -43,18 +43,12 @@ class UserRequest extends FormRequest
         }
         if ($this->isMethod('put')) {
             return [
-                'nickname' => 'required|string',
-                'name' => 'required|string',
-                'email' => 'required|email|unique:Users,email',
-                'password' => 'required'
+                'nickname' => 'string',
+                'name' => 'string',
+                'email' => 'email|unique:Users,email',
+                'password' => 'nullable'
             ];
-        }
-        return [
-            'nickname' => 'required|string',
-            'name' => 'required|string',
-            'email' => 'required|email|unique:Users,email',
-            'password' => 'required'
-        ];
+        }      
     }
     public function messages()
     {

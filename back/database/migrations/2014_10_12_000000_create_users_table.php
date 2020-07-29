@@ -19,8 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('cpf')->unique();  
             $table->string('email')->unique();
-            $table->string('password');       
-            $table->boolean('locator')->default(0);                 
+            $table->string('password');                               
             $table->rememberToken();
             $table->timestamps();                        
         });     

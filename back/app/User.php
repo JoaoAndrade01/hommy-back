@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Republic;
 
@@ -54,21 +55,25 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Republic');
     }
 
-    public function createUser(UserRequest $request)
+    public function createUser(Request $request)
     {
         $this->nickname = $request->nickname;
         $this->name = $request->name;
+        $this->cpf = $request->cpf;
         $this->email = $request->email;
         $this->password = $request->password;
         $this->save();
     }
-    public function updateUser(UserRequest $request)
+    public function updateUser(Request $request)
     {
         if ($request->nickname) {
             $this->nickname = $request->nickname;
         }
         if ($request->name) {
             $this->name = $request->name;
+        }
+        if ($request->cpf) {
+            $this->cpf = $request->cpf;
         }
         if ($request->email) {
             $this->email = $request->email;
@@ -83,5 +88,27 @@ class User extends Authenticatable
         $republic = Republic::findOrFail($republic_id);
         $this->republic_id = $republic_id;
         $this->save();
+    }
+    /*public function visualizeRepublic($republic_id)
+    {
+        $republic = Republic::findOrFail($republic_id);
+        $this->user_id = $republic_id;
+    }*/
+
+    public function desapropriar($republic_id)
+    {
+        $republic = Republic::findOrFail($republic_id);
+        $this->republic_id = NULL;
+        $this->save();
+    }
+    public function favoritar($republic_id)
+    {
+        $republic = Republic::findOrFail($republic_id);
+        $this->favoritas()->attach($republic_id);
+    }
+    public function desfavoritar($republic_id)
+    {
+        $republic = Republic::findOrFail($republic_id);
+        $this->favoritas()->detach($republic_id);
     }
 }
