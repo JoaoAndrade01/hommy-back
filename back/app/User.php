@@ -9,11 +9,13 @@ use Illuminate\Notifications\Notifiable;
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Passport\HasApiTokens;
 use App\Republic;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -61,7 +63,7 @@ class User extends Authenticatable
         $this->name = $request->name;
         $this->cpf = $request->cpf;
         $this->email = $request->email;
-        $this->password = $request->password;
+        $this->password = bcrypt($request->password);
         $this->save();
     }
     public function updateUser(Request $request)
@@ -79,7 +81,7 @@ class User extends Authenticatable
             $this->email = $request->email;
         }
         if ($request->password) {
-            $this->password = $request->password;
+            $this->password = bcrypt($request->password);
         }
         $this->save();
     }
@@ -91,8 +93,7 @@ class User extends Authenticatable
     }
     /*public function visualizeRepublic($republic_id)
     {
-        $republic = Republic::findOrFail($republic_id);
-        $this->user_id = $republic_id;
+        $republic = Republic::findOrFail($republic_id);       
     }*/
 
     public function desapropriar($republic_id)

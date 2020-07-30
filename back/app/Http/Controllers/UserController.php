@@ -56,10 +56,11 @@ class UserController extends Controller
         $republic->anunciar($user_id);
         return response()->json($republic);
     }
-    /*public function visualizeRepublic($id)
+    public function visualizeRepublic($id)
     {
-     
-    }*/
+        $user = User::findOrFail($id);
+        return response()->json($user->republic_id);
+    }
     public function favoritar($user_id, $republic_id)
     {
         $user = User::findOrFail($user_id);
