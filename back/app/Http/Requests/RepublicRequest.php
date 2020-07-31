@@ -61,8 +61,5 @@ class RepublicRequest extends FormRequest
                 'garages' => 'integer'
             ];
         }
-    }
-    public function messages()
-    {
-    }
+    }    
 }

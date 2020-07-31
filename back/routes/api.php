@@ -25,6 +25,8 @@ Route::put('updateRepublic/{id}', 'RepublicController@updateRepublic');
 Route::delete('deleteRepublic/{id}', 'RepublicController@deleteRepublic');
 Route::get('locatario/{id}', 'RepublicController@locatario');
 Route::get('locador/{id}', 'RepublicController@locador');
+Route::get('commentRepublic/{id}', 'RepublicController@commentRepublic');
+
 
 Route::post('createUser', 'UserController@createUser');
 Route::get('showUser/{id}', 'UserController@showUser');
@@ -38,11 +40,15 @@ Route::get('visualizeRepublic/{id}', 'UserController@visualizeRepublic');
 Route::put('favoritar/{user_id}/{republic_id}', 'UserController@favoritar');
 Route::delete('desfavoritar/{user_id}/{republic_id}', 'UserController@desfavoritar');
 
+Route::put('comentar/{comment_id}/{user_id}/{republic_id}', 'UserController@comentar');
+
+
 Route::post('createComment', 'CommentController@createComment');
 Route::get('showComment/{id}', 'CommentController@showComment');
 Route::get('listComment', 'CommentController@listComment');
 Route::put('updateComment/{id}', 'CommentController@updateComment');
 Route::delete('deleteComment/{id}', 'CommentController@deleteComment');
+
 
 //Passport Routes
 Route::post('register', 'API\PassportController@register');

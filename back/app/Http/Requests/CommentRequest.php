@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Comment;
 
 class CommentRequest extends FormRequest
 {
@@ -36,7 +37,7 @@ class CommentRequest extends FormRequest
             return [
                 'date' => 'required|string',
                 'commentary' => 'required|string',
-                'valueOffer' => 'string'
+                'valueOffer' => 'string|nullable'
                 
             ];
         }
@@ -47,8 +48,5 @@ class CommentRequest extends FormRequest
                 'valueOffer' => 'string'
             ];
         }
-    }
-    public function messages()
-    {
-    }
+    }   
 }

@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Republic;
 use App\User;
+use App\Comment;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\RepublicRequest;
 
 
 class RepublicController extends Controller
 {
-    public function createRepublic(Request $request)
+    public function createRepublic(RepublicRequest $request)
     {
         $republic = new Republic;
         $republic->createRepublic($request);
@@ -27,7 +28,7 @@ class RepublicController extends Controller
         $republic = Republic::all();
         return response()->json([$republic]);
     }
-    public function updateRepublic(Request $request, $id)
+    public function updateRepublic(RepublicRequest $request, $id)
     {
         $republic = Republic::findOrFail($id);
         $republic->updateRepublic($request);
@@ -49,9 +50,10 @@ class RepublicController extends Controller
         $republic = Republic::findOrFail($id);
         return response()->json($republic->user);
     }
-    public function visualizeUsers($id)
+    public function commentRepublic($id)
     {
         $republic = Republic::findOrFail($id);
-        return response()->json($republic->user_id);
-    }    
+        $comments = $republic->Comments()->get();
+        return response()->json($comments);
+    }
 }

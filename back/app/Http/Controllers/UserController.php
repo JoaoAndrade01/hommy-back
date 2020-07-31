@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UserRequest;
 use App\Republic;
+use App\Comment;
 
 
 class UserController extends Controller
@@ -72,5 +73,11 @@ class UserController extends Controller
         $user = User::findOrFail($user_id);
         $user->desfavoritar($republic_id);
         return response()->json([$republic_id, 'Republica Desfavoritada!']);
+    }
+    public function comentar($comment_id, $user_id, $republic_id)
+    {
+        $comment = Comment::findOrFail($comment_id);
+        $comment->comentar($user_id, $republic_id);
+        return response()->json($comment);
     }
 }

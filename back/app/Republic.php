@@ -23,6 +23,10 @@ class Republic extends Model
     {
         return $this->belongsToMany('App\User');
     }
+    public function Comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 
     public function createRepublic(RepublicRequest $request)
     {

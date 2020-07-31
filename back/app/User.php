@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\HasApiTokens;
 use App\Republic;
+use App\Comment;
 
 class User extends Authenticatable
 {
@@ -56,6 +57,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Republic');
     }
+    public function Comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 
     public function createUser(UserRequest $request)
     {
@@ -91,11 +96,6 @@ class User extends Authenticatable
         $this->republic_id = $republic_id;
         $this->save();
     }
-    /*public function visualizeRepublic($republic_id)
-    {
-        $republic = Republic::findOrFail($republic_id);       
-    }*/
-
     public function desapropriar($republic_id)
     {
         $republic = Republic::findOrFail($republic_id);

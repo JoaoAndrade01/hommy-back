@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Http\Requests\CommentRequest;
+use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
