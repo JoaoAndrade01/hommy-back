@@ -12,11 +12,12 @@ $factory->define(Republic::class, function (Faker $faker) {
         'neighborhood' => $faker->state,
         'city' => $faker->city,
         'state' => $faker->country,
+        'number' => $faker->randomDigit,
         'bedrooms' => $faker->randomDigit,
         'livingRoom' => $faker->randomDigit,
         'bathrooms' => $faker->randomDigit,
         'kitchens' => $faker->randomDigit,
         'garages' => $faker->randomDigit,
-        'user_id' => factory ('App\Republic')->create()->id
+        'user_id' => factory('App\User')->create()->id
     ];
 });
