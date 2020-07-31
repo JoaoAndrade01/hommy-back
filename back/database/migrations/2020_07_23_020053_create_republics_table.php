@@ -18,16 +18,16 @@ class CreateRepublicsTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('street');
-            $table->integer('number')->unsigned();
-            $table->string('neighborhood');
-            $table->string('city');
-            $table->string('state');
-            $table->integer('size')->unsigned();
-            $table->integer('bedrooms')->default(0)->unsigned();
-            $table->integer('livingRoom')->default(0)->unsigned();
-            $table->integer('bathrooms')->default(0)->unsigned();
-            $table->integer('kitchens')->default(0)->unsigned();
-            $table->integer('garages')->default(0)->unsigned();
+            $table->integer('number')->unsigned()->nullable();
+            $table->string('neighborhood')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->integer('size')->unsigned()->nullable();
+            $table->integer('bedrooms')->default(0)->unsigned()->nullable();
+            $table->integer('livingRoom')->default(0)->unsigned()->nullable();
+            $table->integer('bathrooms')->default(0)->unsigned()->nullable();
+            $table->integer('kitchens')->default(0)->unsigned()->nullable();
+            $table->integer('garages')->default(0)->unsigned()->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
         });
         Schema::table('republics', function (Blueprint $table) {
