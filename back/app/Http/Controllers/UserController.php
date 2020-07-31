@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\RepublicRequest;
+use App\Http\Requests\CommentRequest;
 use App\Republic;
 use App\Comment;
 
@@ -27,6 +29,11 @@ class UserController extends Controller
     {
         $user = User::all();
         return response()->json([$user]);
+    }
+    public function visualizeRepublic($id)
+    {
+        $user = User::findOrFail($id);
+        return response()->json($user->Republic);
     }
     public function updateUser(UserRequest $request, $id)
     {
@@ -51,17 +58,21 @@ class UserController extends Controller
         $user->desapropriar($republic_id);
         return response()->json($user);
     }
-    public function anunciar($user_id, $republic_id)
+    public function anunciar(RepublicRequest $request, $user_id)
     {
-        $republic = Republic::findOrFail($republic_id);
-        $republic->anunciar($user_id);
+        $republic = new Republic;    
+        $republic->createRepublic($request);    
+        $republic->anunciar($user_id);       
         return response()->json($republic);
     }
-    public function visualizeRepublic($id)
+    public function comentar(CommentRequest $request, $user_id, $republic_id)
     {
-        $user = User::findOrFail($id);
-        return response()->json($user->Republic);
+        $comment = new Comment;
+        $comment->createComment($request);
+        $comment->comentar($user_id, $republic_id);
+        return response()->json($comment);
     }
+   
     public function favoritar($user_id, $republic_id)
     {
         $user = User::findOrFail($user_id);
@@ -74,10 +85,5 @@ class UserController extends Controller
         $user->desfavoritar($republic_id);
         return response()->json([$republic_id, 'Republica Desfavoritada!']);
     }
-    public function comentar($comment_id, $user_id, $republic_id)
-    {
-        $comment = Comment::findOrFail($comment_id);
-        $comment->comentar($user_id, $republic_id);
-        return response()->json($comment);
-    }
+ 
 }
