@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function republics()
     {
-        return $this->hasMany("app\Republic");
+        return $this->hasMany('App\Republic');
     }
     public function republic()
     {
@@ -57,7 +57,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Republic');
     }
 
-    public function createUser(Request $request)
+    public function createUser(UserRequest $request)
     {
         $this->nickname = $request->nickname;
         $this->name = $request->name;
@@ -66,7 +66,7 @@ class User extends Authenticatable
         $this->password = bcrypt($request->password);
         $this->save();
     }
-    public function updateUser(Request $request)
+    public function updateUser(UserRequest $request)
     {
         if ($request->nickname) {
             $this->nickname = $request->nickname;

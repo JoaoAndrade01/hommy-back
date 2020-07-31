@@ -43,3 +43,11 @@ Route::get('showComment/{id}', 'CommentController@showComment');
 Route::get('listComment', 'CommentController@listComment');
 Route::put('updateComment/{id}', 'CommentController@updateComment');
 Route::delete('deleteComment/{id}', 'CommentController@deleteComment');
+
+//Passport Routes
+Route::post('register', 'API\PassportController@register');
+Route::post('login', 'API\PassportController@login');
+Route::group(['middleware' => 'auth:api'], function() {
+  Route::post('logout', 'API\PassportController@logout');
+  Route::post('getDetails', 'API\PassportController@getDetails');
+});

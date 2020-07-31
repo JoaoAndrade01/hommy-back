@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;   
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+//use Illuminate\Support\Facades\Auth;
+use Auth;
+use DB;
 
 class PassportController extends Controller
 {
@@ -34,14 +38,16 @@ class PassportController extends Controller
             return response()->json(['error' => 'Unauthorized', 'status' => 401]);
         }
     }
-    public function getDetails(){
+    public function getDetails()
+    {
         $user = Auth::user();
-        return response()->json(['success'=> $user], 200);
+        return response()->json(['user' => $user], 200);
     }
-    public function logout(){
+    public function logout()
+    {
         $accessToken = Auth::user()->token();
-        DB::table('oauth_refresh_tokens')->where('access_token_id', $accessToken->id)->update(['revoked'=>true]);
+        DB::table('oautah_refresh_tokens')->where('access_token_id', $accessToken->id)->update(['revoked' => true]);
         $accessToken->revoke();
-        return response()->json(['usuário deslogado'], 204);
+        return response()->json(['usuário deslogado'], 200);
     }
 }

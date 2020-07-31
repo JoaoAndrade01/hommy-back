@@ -11,7 +11,7 @@ use App\Republic;
 
 class UserController extends Controller
 {
-    public function createUser(Request $request)
+    public function createUser(UserRequest $request)
     {
         $user = new User;
         $user->createUser($request);
@@ -27,7 +27,7 @@ class UserController extends Controller
         $user = User::all();
         return response()->json([$user]);
     }
-    public function updateUser(Request $request, $id)
+    public function updateUser(UserRequest $request, $id)
     {
         $user = User::findOrFail($id);
         $user->updateUser($request);
@@ -59,7 +59,7 @@ class UserController extends Controller
     public function visualizeRepublic($id)
     {
         $user = User::findOrFail($id);
-        return response()->json($user->republic_id);
+        return response()->json($user->Republic);
     }
     public function favoritar($user_id, $republic_id)
     {

@@ -4,21 +4,21 @@ namespace App;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 use App\Republic;
 use App\User;
 
 
 class Comment extends Model
 {
-    public function createComment(Request $request)    {
+    public function createComment(CommentRequest $request)    {
         
         $this->date = $request->date;
         $this->commentary = $request->commentary;
         $this->valueOffer = $request->valueOffer;
         $this->save();      
     }
-    public function updateComment(Request $request, $id)
+    public function updateComment(CommentRequest $request, $id)
     {        
         if ($request->date) {
             $this->date = $request->date;

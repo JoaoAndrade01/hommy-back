@@ -24,7 +24,7 @@ class Republic extends Model
         return $this->belongsToMany('App\User');
     }
 
-    public function createRepublic(Request $request)
+    public function createRepublic(RepublicRequest $request)
     {
         $this->name = $request->name;
         $this->street = $request->street;
@@ -40,7 +40,7 @@ class Republic extends Model
         $this->garages = $request->garages;
         $this->save();
     }
-    public function updateRepublic(Request $request)
+    public function updateRepublic(RepublicRequest $request)
     {
         if ($request->name) {
             $this->name = $request->name;

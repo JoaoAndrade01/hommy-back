@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
-    public function createComment(Request $request)
+    public function createComment(CommentRequest $request)
     {
         $comment = new Comment;
         $comment->createComment($request);     
@@ -23,7 +24,7 @@ class CommentController extends Controller
         $comment = Comment::all();
         return response()->json([$comment]);
     }
-    public function updateComment(Request $request, $id)
+    public function updateComment(CommentRequest $request, $id)
     {
         $comment = Comment::findOrFail($id);
         $comment->updateComment($request);
