@@ -9,9 +9,9 @@ use App\Comment;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\RepublicRequest;
 
-
 class RepublicController extends Controller
 {
+
     public function createRepublic(RepublicRequest $request)
     {
         $republic = new Republic;
@@ -37,8 +37,28 @@ class RepublicController extends Controller
     public function deleteRepublic($id)
     {
         Republic::destroy($id);
-        return response()->json(['produto deletado']);
+        return response()->json(['republica deletada']);
     }
+    public function deletedRepublic()
+    {
+        $republic = Republic::onlyTrashed()->get();
+        return response()->json($republic);
+    }
+    public function restoreRepublic($id)
+    {
+        $republic = Republic::onlyTrashed()->findOrFail($id);
+        $republic->restore();
+        return response()->json($republic);
+    }
+
+    public function restoreAllRepublic()
+    {
+        $republic_all = Republic::onlyTrashed()->get();
+        $republic = Republic::onlyTrashed();
+        $republic->restore();
+        return response()->json($republic_all);
+    }
+
     public function locatario($id)
     {
         $republic = Republic::findOrFail($id);
@@ -55,5 +75,19 @@ class RepublicController extends Controller
         $republic = Republic::findOrFail($id);
         $comments = $republic->Comments()->get();
         return response()->json($comments);
+    }
+    public function search(Request $request)
+    {
+        $queryRepublic = Republic::query(); // Gera um objeto do tipo Builder
+        if ($request->bedrooms) {
+            $bedrooms = $request->bedrooms;
+            $queryRepublic->where('bedrooms', '>=', $bedrooms);
+        }
+        if ($request->street) {
+            $street = $request->street;
+            $queryRepublic->where('street', 'LIKE', '%'.$street.'%');
+        }
+        $search = $queryRepublic->get();
+        return response()->json($search);
     }
 }

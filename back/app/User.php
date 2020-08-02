@@ -12,11 +12,15 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\HasApiTokens;
 use App\Republic;
 use App\Comment;
+Use Illuminate\Database
+\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasApiTokens;
+    use SoftDeletes;
+    
 
     /**
      * The attributes that are mass assignable.

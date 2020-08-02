@@ -7,10 +7,15 @@ use App\Http\Requests\RepublicRequest;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+
 
 
 class Republic extends Model
 {
+    use SoftDeletes;
+
     public function user()
     {
         return $this->belongsTo('App\User');

@@ -22,11 +22,18 @@ Route::post('createRepublic', 'RepublicController@createRepublic');
 Route::get('showRepublic/{id}', 'RepublicController@showRepublic');
 Route::get('listRepublic', 'RepublicController@listRepublic');
 Route::put('updateRepublic/{id}', 'RepublicController@updateRepublic');
+
 Route::delete('deleteRepublic/{id}', 'RepublicController@deleteRepublic');
+
+Route::get('deletedRepublic', 'RepublicController@deletedRepublic');
+Route::put('restoreRepublic/{id}', 'RepublicController@restoreRepublic');
+Route::put('restoreAllRepublic', 'RepublicController@restoreAllRepublic');
+
 Route::get('locatario/{id}', 'RepublicController@locatario');
 Route::get('locador/{id}', 'RepublicController@locador');
 Route::get('commentRepublic/{id}', 'RepublicController@commentRepublic');
 
+Route::post('search', 'RepublicController@search');
 
 Route::post('createUser', 'UserController@createUser');
 Route::get('showUser/{id}', 'UserController@showUser');
