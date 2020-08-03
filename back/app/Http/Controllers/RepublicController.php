@@ -8,6 +8,8 @@ use App\User;
 use App\Comment;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\RepublicRequest;
+use App\Http\Resources\Republics as RepublicsResource;
+
 
 class RepublicController extends Controller
 {
@@ -79,15 +81,22 @@ class RepublicController extends Controller
     public function search(Request $request)
     {
         $queryRepublic = Republic::query(); // Gera um objeto do tipo Builder
-        if ($request->bedrooms) {
-            $bedrooms = $request->bedrooms;
+        if ($request->bedrooms) {            
+            $bedrooms = $request->bedrooms;            
             $queryRepublic->where('bedrooms', '>=', $bedrooms);
         }
         if ($request->street) {
             $street = $request->street;
             $queryRepublic->where('street', 'LIKE', '%'.$street.'%');
         }
-        $search = $queryRepublic->get();
-        return response()->json($search);
+        if($request->id){
+            $id = $request->id;
+            $comments = Comment::with('republic')->where('republic_id', $id)->count();
+            return response()->json($comments);                                      
+        }        
+        $paginas = $queryRepublic->paginate(3);        
+        $search = RepublicsResource::collection($paginas);
+        $ultima_pagina = $paginas->lastPage();
+        return response()->json([$search,'Última página:'.$ultima_pagina]);
     }
 }

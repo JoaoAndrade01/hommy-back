@@ -10,6 +10,8 @@ use App\Http\Requests\RepublicRequest;
 use App\Http\Requests\CommentRequest;
 use App\Republic;
 use App\Comment;
+use App\Http\Resources\User as UserResource;
+
 
 
 class UserController extends Controller
