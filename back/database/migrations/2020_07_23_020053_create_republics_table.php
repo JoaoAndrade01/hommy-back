@@ -20,6 +20,7 @@ class CreateRepublicsTable extends Migration
             $table->string('street');
             $table->integer('number')->unsigned()->nullable();
             $table->string('neighborhood')->nullable();
+            $table->string('photo')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->integer('size')->unsigned()->nullable();

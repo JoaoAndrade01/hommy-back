@@ -35,12 +35,12 @@ class RepublicRequest extends FormRequest
     {
         if ($this->isMethod('post')) {
             return [
-                'name' => 'required|string',
-                'street' => 'required|string',
-                'neighborhood' => 'required|string',
-                'city' => 'required|string',
-                'state' => 'required|string',
-                'bedrooms' => 'required|integer',
+                'name' => 'string',
+                'street' => 'string',
+                'neighborhood' => 'string',
+                'city' => 'string',
+                'state' => 'string',
+                'bedrooms' => 'integer',                
                 'livingRoom' => 'integer',
                 'bathrooms' => 'integer',
                 'kitchens' => 'integer',

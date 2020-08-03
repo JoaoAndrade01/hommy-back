@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -35,6 +36,21 @@ class Republic extends Model
 
     public function createRepublic(RepublicRequest $request)
     {
+        if (!Storage::exists('localPhotos/')) {
+            Storage::makeDirectory('localPhotos/', 0775, true);
+        }   
+        /*$file = $request->file('photo');
+        $filename = rand().'.'.$file->getClientOriginalExtension();
+        $path = $file->storeAs('localPhotos', $filename);
+        $this->photo = $path;*/
+
+        $image = base64_decode($request->photo);
+        $filename = uniqid();
+        $path =storage_path('/app/localPhotos' . $filename);
+        file_put_contents($path, $image);
+        $this->photo=$path;
+
+
         $this->name = $request->name;
         $this->street = $request->street;
         $this->number = $request->number;
@@ -91,5 +107,5 @@ class Republic extends Model
         $user = User::findOrFail($user_id);
         $this->user_id = $user_id;
         $this->save();
-    } 
+    }
 }

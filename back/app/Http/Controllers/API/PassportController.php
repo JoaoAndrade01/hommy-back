@@ -7,22 +7,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use App\Http\Requests\UserRequest;
 //use Illuminate\Support\Facades\Auth;
 use Auth;
 use DB;
 
 class PassportController extends Controller
 {
-    public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:Users,email',
-            'password' => 'required'
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors(), 'status' => 401]);
-        }
+    public function register(UserRequest $request)
+    {      
         $newuser = new User;
         $newuser->createUser($request);
         $success['token'] = $newuser->createToken('MyApp')->accessToken;

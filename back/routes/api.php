@@ -23,7 +23,6 @@ Route::get('showRepublic/{id}', 'RepublicController@showRepublic');
 Route::get('listRepublic', 'RepublicController@listRepublic');
 Route::put('updateRepublic/{id}', 'RepublicController@updateRepublic');
 
-Route::delete('deleteRepublic/{id}', 'RepublicController@deleteRepublic');
 
 Route::get('deletedRepublic', 'RepublicController@deletedRepublic');
 Route::put('restoreRepublic/{id}', 'RepublicController@restoreRepublic');
@@ -60,7 +59,8 @@ Route::delete('deleteComment/{id}', 'CommentController@deleteComment');
 //Passport Routes
 Route::post('register', 'API\PassportController@register');
 Route::post('login', 'API\PassportController@login');
-Route::group(['middleware' => 'auth:api'], function() {
+Route::group(['middleware' => 'auth:api'], function() {  
+  Route::delete('deleteRepublic/{id}', 'RepublicController@deleteRepublic')->middleware('deleteRepublic');
   Route::post('logout', 'API\PassportController@logout');
   Route::post('getDetails', 'API\PassportController@getDetails');
 });
