@@ -11,15 +11,19 @@ use App\Http\Requests\UserRequest;
 //use Illuminate\Support\Facades\Auth;
 use Auth;
 use DB;
+use App\Notifications\UserNotification;
 
 class PassportController extends Controller
 {
     public function register(UserRequest $request)
-    {      
+    {
+
         $newuser = new User;
         $newuser->createUser($request);
         $success['token'] = $newuser->createToken('MyApp')->accessToken;
+        $newuser->notify(new UserNotification());
         return response()->json(['success' => $success, 'user' => $newuser], 200);
+        
     }
     public function login()
     {
